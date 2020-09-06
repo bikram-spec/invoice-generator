@@ -1,0 +1,28 @@
+.grid-container {
+    width: 100% auto;
+    margin-top: 5px;
+    margin-left: 30% auto;
+}
+.full-width {
+  width: 50%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+.card-layout {
+  min-width: 120px;
+  margin: 20px auto;
+}
+.col:last-child {
+  margin-right: 0;
+}
+.button-eye {
+  font-size: 50px;
+}

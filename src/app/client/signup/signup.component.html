@@ -1,0 +1,76 @@
+<form [formGroup]="signup" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="card-layout">
+      <mat-card-header>
+        <mat-card-title><h1 class="mat-h1"><i>QPG</i></h1></mat-card-title>
+        <mat-card-subtitle><h2 class="mat-h2">Create Your QPG Account</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Institue Name" formControlName="institue_name">
+              <mat-error *ngIf="signup.controls['institue_name'].hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="signup.controls['email'].hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="signup.controls['email'].hasError('email')">
+                Email is <strong>Invalid</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+                <mat-label>Enter The Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+                <mat-icon class="button-eye">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              <mat-error *ngIf="signup.controls['password'].hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="signup.controls['password'].hasError('minLength')">
+                Password Should be of  <strong>minium 8 Characters</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+                    <mat-label>Retype The Password</mat-label>
+                    <input matInput #cnfpassword minlength="5" [type]="hide ? 'password' : 'text'" formControlName="confirm_password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+                    <mat-icon class="button-eye">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+              <mat-error *ngIf="signup.controls['confirm_password'].hasError('required')">
+                This Field is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="signup.controls['confirm_password'].hasError('mustMatch')">
+                The Password doesn't <strong>Match</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </mat-card-actions>
+      <mat-card-footer class="card-footer">
+        <i>
+        Copyright Createed by bikram gauda
+        </i>
+    </mat-card-footer>
+    </mat-card>
+  </form>
+  
