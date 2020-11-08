@@ -9,17 +9,38 @@ import { DashboardComponent } from './client/dashboard/dashboard.component';
 import { FormComponent } from './client/form/form.component';
 import { SigninComponent } from './client/signin/signin.component';
 import { SignupComponent } from './client/signup/signup.component';
+import { ProfileComponent } from '../app/client/profile/profile.component';
+import { NotfoundComponent } from '../app/client/notfound/notfound.component';
+import { HomeComponent } from '../app/client/home/home.component'
+
+// auth guard import
+
+import { AuthGuard } from '../app/auth/auth.guard';
+
 const routes: Routes = [
+  {path:"home",component: HomeComponent},
+  {path:"404",component:NotfoundComponent},
   {path:'signup',component:SignupComponent},
   {path:'login',component:SigninComponent},
-  {path:'', component:NavComponent, children:[
-    {path:'dashboard',component:DashboardComponent},
-    {path:'branch', component:BranchComponent},
-    {path:'subjects',component:SubjectsComponent},
-    {path:'questions',component:QuestionsComponent},
-    {path:'papers',component:PapersComponent},
-    {path:'branch/form',component:FormComponent}
-  ]}
+  {path:'profile',component:ProfileComponent,canActivate:[ AuthGuard]},
+  {path:'dashboard', component:NavComponent,children:[
+    {path:'',component:DashboardComponent},
+  ],canActivate:[ AuthGuard]},
+  {path:'branch', component:NavComponent,children:[
+    {path:'', component:BranchComponent},
+    {path:'form',component:FormComponent}
+  ],canActivate:[ AuthGuard]},
+  {path:'subjects', component:NavComponent,children:[
+    {path:'',component:SubjectsComponent},
+  ],canActivate:[ AuthGuard]},
+  {path:'questions', component:NavComponent,children:[
+    {path:'',component:QuestionsComponent},
+  ],canActivate:[ AuthGuard]},
+  {path:'papers', component:NavComponent,children:[
+    {path:'',component:PapersComponent},
+  ],canActivate:[ AuthGuard]},
+  {path:"",redirectTo:"/home",pathMatch:"full"},
+  {path:"**",redirectTo:"/404"}
 ];
 
 @NgModule({
